@@ -29,4 +29,24 @@ class Post
         return $insert;
     }
     
+    // Fonction qui permet de modifier un post
+    public function updatePost($title, $description, $image, $id_to_update){
+
+        $query = "UPDATE post SET title = :title, description = :description, image = :image WHERE id = $id_to_update";
+        $params =[
+            'title' => $title,
+            'description' => $description,
+            'image' => $image,
+                //'user_id' => $user_id, je ne pense que nous n'avons pas  ceci 
+        ];
+        $update = $this->db->query($query,$params);
+        return $update;
+    }
+
+// Fonction qui récupère le post par son id
+    public function getPostById($post_id){
+        $query = "SELECT * FROM post WHERE id = $post_id";
+        $post = $this->db->select($query);
+        return $post;
+    }
 }
